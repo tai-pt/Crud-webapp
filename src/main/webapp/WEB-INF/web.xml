@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+<web-app
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+       
   <display-name>CRUD-Webapp</display-name>
   <welcome-file-list>
-  
+   
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
@@ -10,8 +15,21 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-  <error-page>
+      <!-- Servlet Configuration -->
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>com.crud.controller.CrudController</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+ 
+    <error-page>
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/Error.jsp</location>
 	</error-page>
+	
 </web-app>

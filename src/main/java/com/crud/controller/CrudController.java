@@ -9,18 +9,16 @@ import com.crud.model.Users;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-@WebServlet("/")
+
 public class CrudController extends HttpServlet {
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 private UserDAO userdao;
-public void init () {
+
+public void init() {
 	userdao = new UserDAO();
 }
 
@@ -69,46 +67,48 @@ public void init () {
 
 	private void insertuser(HttpServletRequest req, HttpServletResponse resp) throws ClassNotFoundException, SQLException, IOException {
 		// TODO Auto-generated method stub
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
-		String country = req.getParameter("country");
+		String name = req.getParameter("name2");
+		String email = req.getParameter("email2");
+		String country = req.getParameter("country2");
 		Users users = new Users (name,email,country);
-		userdao.insert(users);
+		userdao.insertUser(users);
 		resp.sendRedirect("list");
 	}
 
-	private void edituser(HttpServletRequest req, HttpServletResponse resp) throws ClassNotFoundException, ServletException, IOException {
-		// TODO Auto-generated method stub
-		int id = Integer.parseInt(req.getParameter("id"));
-		Users users = userdao.selectUsers(id);
-		RequestDispatcher dispatcher = req.getRequestDispatcher("users-edit.jsp");
-		req.setAttribute("users",users );
-		dispatcher.forward(req, resp);
-	}
+	 private void edituser(HttpServletRequest req, HttpServletResponse resp)
+			    throws  ServletException, IOException, ClassNotFoundException {
+			        int id = Integer.parseInt(req.getParameter("id"));
+			        Users user = userdao.selectUser(id);
+			        req.setAttribute("user", user);
+			        req.getRequestDispatcher("/users-form.jsp").forward(req, resp);
+
+
+			    }
+
 
 	private void shownewForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher =req.getRequestDispatcher("users-show.jsp");
+		RequestDispatcher dispatcher =req.getRequestDispatcher("users-form.jsp");
 		dispatcher.forward(req, resp);
 	}
 
-	private void updateuser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		// TODO Auto-generated method stub
-		int id = Integer.parseInt(req.getParameter("id"));
-		String name = req.getParameter("name");
-		String email =req.getParameter("email");
-		String country = req.getParameter("country");
-		Users user = new Users (id , name , email ,country);
-		userdao.updateusers(user);
-		resp.sendRedirect("list");
-		
-	}
+	 private void updateuser(HttpServletRequest request, HttpServletResponse response)
+			    throws SQLException, IOException, ClassNotFoundException {
+			        String name = request.getParameter("name");
+			        String email = request.getParameter("email");
+			        String country = request.getParameter("country");
+
+			        Users book = new Users( name, email, country);
+			        userdao.updateUser(book);
+			        response.sendRedirect("list");
+			    }
+
 
 	private void ListUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		List<Users> list = userdao.selectAllUsers();
+		List<Users> list = userdao.getAllUsers();
 				req.setAttribute("list", list);
-				RequestDispatcher dispatcher = req.getRequestDispatcher("users-list.jsp");
+				RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/view/users-list.jsp");
 				dispatcher.forward(req, resp);
 	}
 	

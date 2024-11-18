@@ -6,6 +6,9 @@ public class Users {
 	private String name;
 	private String email;
 	private String country;
+	private String name2;
+	private String email2;
+	private String country2;
 
 	
 
@@ -18,7 +21,10 @@ public class Users {
 	}
 
 	public Users(String name2, String email2, String country2) {
-		// TODO Auto-generated constructor stub
+		super ();
+		this.name2=name2;
+		this.email2=email2;
+		this.country2=country2;
 	}
 
 	public int getId() {
