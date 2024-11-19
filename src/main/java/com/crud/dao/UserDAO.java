@@ -13,10 +13,10 @@ import com.crud.model.Users;
 
 public class UserDAO {
 	
-	private static final String SELECT_USER_BY_ID = "SELECT * FROM crud_webapp.users where id = ?";
+	private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
 	private static final String SELECT_ALL_USERS = "select * from crud_webapp.users";
 	private static final String DELETE_USERS_SQL = "delete from crud_webapp.users where id = ?";
-	private static final String UPDATE_USERS_SQL = "UPDATE users SET name = ?, email = ?, country = ?, WHERE id = ?";
+	 private static final String UPDATE_USERS_SQL = "update crud_webapp.users set name = ?,email= ?, country =? where id = ?;";
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, country) VALUES " +
 	        " (?, ?, ?);";
 
@@ -104,24 +104,23 @@ public class UserDAO {
 		return users;
 	}
 
-	  public boolean updateUser(Users user) throws SQLException, ClassNotFoundException {
+	 public boolean updateUsers(Users user) throws SQLException, ClassNotFoundException {
 	        boolean rowUpdated;
 	        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
 	            statement.setString(1, user.getName());
 	            statement.setString(2, user.getEmail());
 	            statement.setString(3, user.getCountry());
 	            statement.setInt(4, user.getId());
-
 	            rowUpdated = statement.executeUpdate() > 0;
 	        }
 	        return rowUpdated;
-	  }
+	    }
 	public boolean deleteuser(int id) {
 		boolean delete;
 		try (Connection con = getConnection()) {
 			PreparedStatement st = con.prepareStatement(DELETE_USERS_SQL);
 			st.setInt(1, id);
-			delete = st.executeUpdate() > 0;
+			delete = st.executeUpdate()  > 0;
 			return delete;
 
 		} catch (ClassNotFoundException e) {

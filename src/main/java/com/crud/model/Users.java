@@ -6,9 +6,7 @@ public class Users {
 	private String name;
 	private String email;
 	private String country;
-	private String name2;
-	private String email2;
-	private String country2;
+	
 
 	
 
@@ -20,11 +18,11 @@ public class Users {
 		this.country = country;
 	}
 
-	public Users(String name2, String email2, String country2) {
+	public Users(String name, String email, String country) {
 		super ();
-		this.name2=name2;
-		this.email2=email2;
-		this.country2=country2;
+		this.name=name;
+		this.email=email;
+		this.country=country;
 	}
 
 	public int getId() {
